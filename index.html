@@ -1,59 +1,61 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería Pixelada</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #1a1a1a; color: white; margin: 0; padding: 0; }
-    header, footer { background: #ff2e63; padding: 20px; text-align: center; }
-    header h1, footer p { margin: 0; }
-    .galeria { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-    .item { background: #2e2e2e; border-radius: 10px; padding: 15px; width: 300px; }
-    .item img { width: 100%; border-radius: 6px; }
-    .boton-compra { display: block; margin: 15px auto 0; padding: 10px; background: #ff2e63; color: white; text-align: center; text-decoration: none; border-radius: 5px; }
-    .boton-compra:hover { background: #ff4f7a; }
-    .seccion { padding: 20px; text-align: center; }
-  </style>
+  <title>Galería Pixeleada - Iniciar sesión</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
+      from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBu9jPiqmS7woAwfXFKMXPCVvawl-PQP7I",
+      authDomain: "galeria-pixeleada.firebaseapp.com",
+      projectId: "galeria-pixeleada",
+      storageBucket: "galeria-pixeleada.firebasestorage.app",
+      messagingSenderId: "242541838342",
+      appId: "1:242541838342:web:324db296d18d03fd4d8387",
+      measurementId: "G-SFQF9STC2K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    document.getElementById("registerForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => window.location.href = "privado.html")
+        .catch(err => alert(err.message));
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => window.location.href = "privado.html")
+        .catch(err => alert(err.message));
+    });
+  </script>
 </head>
 <body>
-  <header>
-    <h1>Aquí no hay filtros… solo arte y tentación en forma de pixels 🔥</h1>
-  </header>
+  <h1>Bienvenido a Galería Pixeleada</h1>
 
-  <section class="galeria">
-    <div class="item">
-      <img src="teaser01.jpg" alt="Teaser 1">
-      <h2>Set exclusivo #1</h2>
-      <p>Precio: $30 MXN</p>
-      <a class="boton-compra" href="https://mpago.la/33m9Xpr" target="_blank">Comprar con Mercado Pago</a>
-    </div>
-    <div class="item">
-      <img src="teaser02.jpg" alt="Teaser 2">
-      <h2>Set exclusivo #2</h2>
-      <p>Precio: $30 MXN</p>
-      <a class="boton-compra" href="https://mpago.la/33m9Xpr" target="_blank">Comprar con Mercado Pago</a>
-    </div>
-    <div class="item">
-      <img src="teaser03.jpg" alt="Teaser 3">
-      <h2>Set exclusivo #3</h2>
-      <p>Precio: $30 MXN</p>
-      <a class="boton-compra" href="https://mpago.la/33m9Xpr" target="_blank">Comprar con Mercado Pago</a>
-    </div>
-  </section>
+  <h2>Registro</h2>
+  <form id="registerForm">
+    <input type="email" name="email" placeholder="Correo" required><br>
+    <input type="password" name="password" placeholder="Contraseña" required><br>
+    <button type="submit">Registrarse</button>
+  </form>
 
-  <section class="seccion">
-    <h2>Sobre esta página</h2>
-    <p>Bienvenido a tu galería privada de arte pixelado. Cada imagen es una invitación a explorar más allá del teaser. Entrega segura después del pago.</p>
-  </section>
-
-  <section class="seccion">
-    <h2>Contacto</h2>
-    <p>¿Tienes dudas o pedidos especiales? Escríbenos por Instagram o al correo contacto@picante.mx</p>
-  </section>
-
-  <footer>
-    <p>Contenido artístico con picante mexicano. Sólo para quienes saben mirar más allá del píxel.</p>
-  </footer>
+  <h2>Iniciar sesión</h2>
+  <form id="loginForm">
+    <input type="email" name="email" placeholder="Correo" required><br>
+    <input type="password" name="password" placeholder="Contraseña" required><br>
+    <button type="submit">Ingresar</button>
+  </form>
 </body>
 </html>

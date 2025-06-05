@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contenido Exclusivo</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBu9jPiqmS7woAwfXFKMXPCVvawl-PQP7I",
+      authDomain: "galeria-pixeleada.firebaseapp.com",
+      projectId: "galeria-pixeleada",
+      storageBucket: "galeria-pixeleada.firebasestorage.app",
+      messagingSenderId: "242541838342",
+      appId: "1:242541838342:web:324db296d18d03fd4d8387",
+      measurementId: "G-SFQF9STC2K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    function cerrarSesion() {
+      signOut(auth).then(() => window.location.href = "index.html");
+    }
+  </script>
+</head>
+<body>
+  <h1>Contenido exclusivo desbloqueado 🔓</h1>
+  <p>Gracias por suscribirte. Aquí irá tu galería privada.</p>
+  <button onclick="cerrarSesion()">Cerrar sesión</button>
+</body>
+</html>
