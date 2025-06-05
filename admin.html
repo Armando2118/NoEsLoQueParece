@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de Admin - Galería Pixeleada</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+    import { getFirestore, collection, getDocs, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBu9jPiqmS7woAwfXFKMXPCVvawl-PQP7I",
+      authDomain: "galeria-pixeleada.firebaseapp.com",
+      projectId: "galeria-pixeleada",
+      storageBucket: "galeria-pixeleada.firebasestorage.app",
+      messagingSenderId: "242541838342",
+      appId: "1:242541838342:web:324db296d18d03fd4d8387",
+      measurementId: "G-SFQF9STC2K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const db = getFirestore();
+
+    const adminEmail = "armandosal0101@gmail.com";
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user || user.email !== adminEmail) {
+        alert("Acceso denegado. Solo administradores.");
+        window.location.href = "index.html";
+        return;
+      }
+
+      const userList = document.getElementById("usuarios");
+      const snapshot = await getDocs(collection(db, "membresias"));
+      snapshot.forEach(docu => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <strong>${docu.id}</strong> — 
+          <button onclick="activarMembresia('${docu.id}')">Activar membresía 30 días</button>
+        `;
+        userList.appendChild(div);
+      });
+    });
+
+    window.activarMembresia = async (correo) => {
+      const ref = doc(db, "membresias", correo);
+      await setDoc(ref, { fechaPago: serverTimestamp() }, { merge: true });
+      alert("Membresía activada para " + correo);
+      location.reload();
+    };
+
+    window.salir = () => signOut(auth).then(() => window.location.href = "index.html");
+  </script>
+  <style>
+    body { font-family: sans-serif; background: #111; color: white; padding: 20px; }
+    h1 { color: #ff2e63; }
+    #usuarios div { margin-bottom: 10px; }
+    button { padding: 5px 10px; background: #ff2e63; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #ff4f7a; }
+  </style>
+</head>
+<body>
+  <h1>Panel de Administración 👨‍💻</h1>
+  <p>Solo tú tienes acceso a esta página.</p>
+  <div id="usuarios">Cargando usuarios con membresía...</div>
+  <br />
+  <button onclick="salir()">Cerrar sesión</button>
+</body>
+</html>
