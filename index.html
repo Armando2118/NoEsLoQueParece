@@ -5,57 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galería Pixelada</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1a1a1a;
-      color: white;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background: #ff2e63;
-      padding: 20px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    .galeria {
-      padding: 30px 10px;
-    }
-    .item {
-      background: #2e2e2e;
-      border-radius: 8px;
-      margin: 20px auto;
-      padding: 15px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-    .item img {
-      width: 100%;
-      border-radius: 6px;
-    }
-    .boton-compra {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #ff2e63;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .boton-compra:hover {
-      background: #ff4f7a;
-    }
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      font-size: 14px;
-      color: #aaa;
-    }
+    body { font-family: Arial, sans-serif; background: #1a1a1a; color: white; margin: 0; padding: 0; }
+    header, footer { background: #ff2e63; padding: 20px; text-align: center; }
+    header h1, footer p { margin: 0; }
+    .galeria { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+    .item { background: #2e2e2e; border-radius: 10px; padding: 15px; width: 300px; }
+    .item img { width: 100%; border-radius: 6px; }
+    .boton-compra { display: block; margin: 15px auto 0; padding: 10px; background: #ff2e63; color: white; text-align: center; text-decoration: none; border-radius: 5px; }
+    .boton-compra:hover { background: #ff4f7a; }
+    .seccion { padding: 20px; text-align: center; }
   </style>
 </head>
 <body>
@@ -65,15 +23,37 @@
 
   <section class="galeria">
     <div class="item">
-      <img src="teaser01.jpg" alt="Vista previa teaser">
+      <img src="teaser01.jpg" alt="Teaser 1">
       <h2>Set exclusivo #1</h2>
+      <p>Precio: $30 MXN</p>
+      <a class="boton-compra" href="https://mpago.la/33m9Xpr" target="_blank">Comprar con Mercado Pago</a>
+    </div>
+    <div class="item">
+      <img src="teaser02.jpg" alt="Teaser 2">
+      <h2>Set exclusivo #2</h2>
+      <p>Precio: $30 MXN</p>
+      <a class="boton-compra" href="https://mpago.la/33m9Xpr" target="_blank">Comprar con Mercado Pago</a>
+    </div>
+    <div class="item">
+      <img src="teaser03.jpg" alt="Teaser 3">
+      <h2>Set exclusivo #3</h2>
       <p>Precio: $30 MXN</p>
       <a class="boton-compra" href="https://mpago.la/33m9Xpr" target="_blank">Comprar con Mercado Pago</a>
     </div>
   </section>
 
+  <section class="seccion">
+    <h2>Sobre esta página</h2>
+    <p>Bienvenido a tu galería privada de arte pixelado. Cada imagen es una invitación a explorar más allá del teaser. Entrega segura después del pago.</p>
+  </section>
+
+  <section class="seccion">
+    <h2>Contacto</h2>
+    <p>¿Tienes dudas o pedidos especiales? Escríbenos por Instagram o al correo contacto@picante.mx</p>
+  </section>
+
   <footer>
-    Arte visual privado. Todo el contenido tiene derechos reservados.
+    <p>Contenido artístico con picante mexicano. Sólo para quienes saben mirar más allá del píxel.</p>
   </footer>
 </body>
 </html>
