@@ -23,10 +23,16 @@
     const auth = getAuth();
     const db = getFirestore();
 
+    const adminEmail = "armandosal0101@gmail.com";
+
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         window.location.href = "index.html";
       } else {
+        if (user.email === adminEmail) {
+          document.getElementById("adminBtn").style.display = "inline-block";
+        }
+
         const docRef = doc(db, "membresias", user.email);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -58,12 +64,14 @@
     .item img { width: 100%; border-radius: 6px; }
     .boton { display: block; margin-top: 10px; background: #ff2e63; color: white; text-align: center; padding: 10px; border-radius: 5px; text-decoration: none; }
     button { margin-top: 20px; background: gray; color: white; padding: 10px; border: none; border-radius: 5px; }
+    #adminBtn { display: none; margin: 10px auto; background: #ffc107; color: black; padding: 10px 15px; border-radius: 6px; text-align: center; }
   </style>
 </head>
 <body>
   <header>
     <h1>Galería privada - Acceso autorizado</h1>
     <p>Tu membresía está activa. Disfruta el contenido exclusivo.</p>
+    <a id="adminBtn" href="admin.html">⚙️ Panel Admin</a>
   </header>
 
   <section>
